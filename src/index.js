@@ -1,5 +1,6 @@
 const command = process.argv[2];
 const argument = process.argv.slice(3);
+const helpController = require("./controller/helpController");
 const contactController = require("./controller/contactController");
 const clustersController = require("./controller/clustersController");
 
@@ -35,6 +36,6 @@ switch (command) {
     break;
 
   default:
-    contactController.help();
+    helpController();
     break;
 }

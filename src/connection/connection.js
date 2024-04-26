@@ -1,6 +1,6 @@
 const mysql = require("mysql2/promise");
 
-const createConnection = async () => {
+module.exports = async function createConnection() {
   try {
     const connection = await mysql.createConnection(
       "mysql://root:dummyPassword_123@localhost/address_book"
@@ -11,5 +11,3 @@ const createConnection = async () => {
     throw error;
   }
 };
-
-module.exports = createConnection;

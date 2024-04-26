@@ -1,16 +1,6 @@
 const model = require("../model/contactModel");
 const view = require("../view/view");
 
-const help = async () => {
-  try {
-    const result = await view.help();
-    
-    return result;
-  } catch (error) {
-    throw error;
-  }
-}
-
 const create = async (name, phoneNumber, company, email) => {
   try {
     const data = await model.create(name, phoneNumber, company, email);
@@ -44,4 +34,4 @@ const deleted = async (id) => {
   }
 };
 
-module.exports = { help, create, update, deleted };
+module.exports = { create, update, deleted };
