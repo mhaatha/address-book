@@ -23,6 +23,7 @@ const help = async () => {
   }
 };
 
+// CONTACT
 const createContact = async (data) => {
   try {
     console.log(`Contact created with id ${data[0].insertId}`);
@@ -60,4 +61,42 @@ const deleteContact = async (id, data) => {
   }
 };
 
-module.exports = { help, createContact, updateContact, deleteContact };
+// CLUSTERS
+const createClusters = async (data) => {
+  try {
+    console.log(`Cluster created with id ${data[0].insertId}`);
+    process.exit(0);
+  } catch (error) {
+    throw error;
+  }
+}
+
+const updateClusters = async (data) => {
+  try {
+    if (data[0].changedRows > 0) {
+      console.log("Cluster updated successfully.");
+    } else {
+      console.log("No data updated.")
+    }
+    console.log(data[0].info);
+    process.exit(0);
+  } catch (error) {
+    throw error;
+  }
+};
+
+const deleteClusters = async (id, data) => {
+  try {
+    if (data[0].affectedRows > 0) {
+      console.log(`Cluster with id ${id} is deleted.`);
+    } else {
+      console.log(`No data deleted.`);
+    }
+    console.log(`Affected rows: ${data[0].affectedRows}`);
+    process.exit(0);
+  } catch (error) {
+    throw error;
+  }
+};
+
+module.exports = { help, createContact, updateContact, deleteContact, createClusters, updateClusters, deleteClusters };
