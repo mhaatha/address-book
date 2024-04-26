@@ -1,5 +1,5 @@
-const model = require('../model/clustersModel');
-const view = require('../view/view');
+const model = require("../model/clustersModel");
+const view = require("../view/view");
 
 const create = async (clusterName) => {
   try {
@@ -32,6 +32,6 @@ const deleted = async (id) => {
   } catch (error) {
     throw error;
   }
-}
+};
 
 module.exports = { create, update, deleted };

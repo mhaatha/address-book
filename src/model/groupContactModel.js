@@ -1,11 +1,10 @@
 const createConnection = require("../connection/connection");
 
-const create = async (name, phoneNumber, company, email) => {
+const create = async (contactId, clusterId) => {
   try {
     const connection = await createConnection();
-    const sql =
-      "INSERT INTO `Contact`(`name`, `phoneNumber`, `company`, `email`) VALUES (?, ?, ?, ?)";
-    const values = [name, phoneNumber, company, email];
+    const sql = "INSERT INTO GroupContact (contactId, clusterId) VALUES (?, ?)";
+    const values = [contactId, clusterId];
 
     const result = await connection.execute(sql, values);
 
@@ -15,12 +14,12 @@ const create = async (name, phoneNumber, company, email) => {
   }
 };
 
-const update = async (id, name, phoneNumber, company, email) => {
+const update = async (id, contactId, clusterId) => {
   try {
     const connection = await createConnection();
     const sql =
-      "UPDATE Contact SET name = ?, phoneNumber = ?, company = ?, email = ? WHERE id = ?";
-    const values = [name, phoneNumber, company, email, id];
+      "UPDATE GroupContact SET contactId = ?, clusterId = ? WHERE id = ?";
+    const values = [contactId, clusterId, id];
 
     const result = await connection.execute(sql, values);
 
@@ -33,7 +32,7 @@ const update = async (id, name, phoneNumber, company, email) => {
 const deleted = async (id) => {
   try {
     const connection = await createConnection();
-    const sql = "DELETE FROM Contact WHERE id = ?";
+    const sql = "DELETE FROM GroupContact WHERE id = ?";
     const value = [id];
 
     const result = await connection.execute(sql, value);

@@ -1,4 +1,4 @@
-const createConnection = require('../connection/connection');
+const createConnection = require("../connection/connection");
 
 const create = async (clusterName) => {
   try {
@@ -21,7 +21,7 @@ const update = async (id, clusterName) => {
     const values = [clusterName, id];
 
     const result = await connection.execute(sql, values);
-    
+
     return result;
   } catch (error) {
     throw error;
@@ -40,6 +40,6 @@ const deleted = async (id) => {
   } catch (error) {
     throw error;
   }
-}
+};
 
 module.exports = { create, update, deleted };

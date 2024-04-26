@@ -38,7 +38,7 @@ const updateContact = async (data) => {
     if (data[0].changedRows > 0) {
       console.log("Contact updated successfully.");
     } else {
-      console.log("No data updated.")
+      console.log("No data updated.");
     }
     console.log(data[0].info);
     process.exit(0);
@@ -69,14 +69,14 @@ const createClusters = async (data) => {
   } catch (error) {
     throw error;
   }
-}
+};
 
 const updateClusters = async (data) => {
   try {
     if (data[0].changedRows > 0) {
       console.log("Cluster updated successfully.");
     } else {
-      console.log("No data updated.")
+      console.log("No data updated.");
     }
     console.log(data[0].info);
     process.exit(0);
@@ -99,4 +99,53 @@ const deleteClusters = async (id, data) => {
   }
 };
 
-module.exports = { help, createContact, updateContact, deleteContact, createClusters, updateClusters, deleteClusters };
+// GROUP CONTACT
+const createGroupContact = async (data) => {
+  try {
+    console.log(`Group Contact created with id ${data[0].insertId}`);
+    process.exit(0);
+  } catch (error) {
+    throw error;
+  }
+};
+
+const updateGroupContact = async (data) => {
+  try {
+    if (data[0].changedRows > 0) {
+      console.log("Group Contact updated successfully.");
+    } else {
+      console.log("No data updated.");
+    }
+    console.log(data[0].info);
+    process.exit(0);
+  } catch (error) {
+    throw error;
+  }
+};
+
+const deleteGroupContact = async (id, data) => {
+  try {
+    if (data[0].affectedRows > 0) {
+      console.log(`Group Contact with id ${id} is deleted.`);
+    } else {
+      console.log(`No data deleted.`);
+    }
+    console.log(`Affected rows: ${data[0].affectedRows}`);
+    process.exit(0);
+  } catch (error) {
+    throw error;
+  }
+};
+
+module.exports = {
+  help,
+  createContact,
+  updateContact,
+  deleteContact,
+  createClusters,
+  updateClusters,
+  deleteClusters,
+  createGroupContact,
+  updateGroupContact,
+  deleteGroupContact,
+};
