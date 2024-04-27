@@ -36,8 +36,12 @@ const deleted = async (id) => {
     const sql = "DELETE FROM Contact WHERE id = ?";
     const value = [id];
 
+    // Delete in GroupContact
+    const sql2 = "DELETE FROM GroupContact WHERE contactId = ?";
+    await connection.execute(sql2, value);
+    
     const result = await connection.execute(sql, value);
-
+    
     return result;
   } catch (error) {
     throw error;

@@ -91,7 +91,11 @@ const deleteContact = async (id, data) => {
 
 const showContact = async (data) => {
   try {
-    table(data[0]);
+    if (data[0].length > 0) {
+      table(data[0]);
+    } else {
+      console.log("No Contact found.");
+    }
     process.exit(0);
   } catch (error) {
     throw error;
