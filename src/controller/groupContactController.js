@@ -34,9 +34,9 @@ const deleted = async (id) => {
   }
 };
 
-const showGroups = async () => {
+const showGroups = async (clusterName) => {
   try {
-    const data = await model.showGroups();
+    const data = await model.showGroups(clusterName);
     const result = await view.showGroups(data);
 
     return result;

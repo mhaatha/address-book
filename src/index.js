@@ -51,8 +51,8 @@ switch (command) {
     contactController.show();
     break;
 
-  case "showGroups":
-    groupContactController.showGroups();
+  case "showClusters":
+    groupContactController.showGroups(argument[0]);
     break;
 
   default:

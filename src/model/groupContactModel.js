@@ -43,17 +43,19 @@ const deleted = async (id) => {
   }
 };
 
-const showGroups = async () => {
+const showGroups = async (clusterName) => {
   try {
     const connection = await createConnection();
     const sql = `
-    SELECT Contact.name, Contact.phoneNumber, Contact.company, Contact.email, Clusters.clusterName
+    SELECT Contact.id, Contact.name, Contact.phoneNumber, Contact.company, Contact.email
     FROM Contact
-    INNER JOIN GroupContact ON Contact.id=GroupContact.contactId
-    INNER JOIN Clusters ON GroupContact.clusterId=Clusters.id
+    JOIN GroupContact ON Contact.id = GroupContact.contactId
+    JOIN Clusters ON GroupContact.clusterId = Clusters.id
+    WHERE Clusters.clusterName = ?;
     `
+    const value = [clusterName]
 
-    const result = await connection.execute(sql);
+    const result = await connection.execute(sql, value);
 
     return result;
   } catch (error) {

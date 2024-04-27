@@ -22,7 +22,7 @@ const table = (input) => {
     r = r.replace(/'/g, " ");
     result += `${r}\n`;
   }
-  
+
   console.log(result);
 };
 
@@ -40,10 +40,10 @@ const help = async () => {
     > node index.js create Clusters <clusterName>      
     > node index.js update Clusters <id> <clusterName>     
     > node index.js delete Clusters <id>     
-    > node index.js showClusters     
+    > node index.js showClusters <clusterName>    
     > node index.js create ContactGroups <contactId> <clusterId>     
     > node index.js update ContactGroups <id> <contactId> <clusterId>      
-    > node index.js delete ContactGroups <id>      
+    > node index.js delete ContactGroups <id>  
     > node index.js help       
     `);
   } catch (error) {
@@ -176,7 +176,11 @@ const deleteGroupContact = async (id, data) => {
 
 const showGroups = async (data) => {
   try {
-    table(data[0])
+    if (data[0].length > 0) {
+      table(data[0]);
+    } else {
+      console.log("No data with that clusterName found.");
+    }
     process.exit(0);
   } catch (error) {
     throw error;
@@ -195,5 +199,5 @@ module.exports = {
   updateGroupContact,
   deleteGroupContact,
   showContact,
-  showGroups
+  showGroups,
 };
