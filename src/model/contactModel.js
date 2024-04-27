@@ -47,7 +47,12 @@ const deleted = async (id) => {
 const show = async () => {
   try {
     const connection = await createConnection();
-    const sql = "SELECT * FROM Contact";
+    const sql = `
+    SELECT Contact.id, Contact.name, Contact.phoneNumber, Contact.company, Contact.email, Clusters.clusterName
+    FROM Contact
+    INNER JOIN GroupContact ON Contact.id=GroupContact.contactId
+    INNER JOIN Clusters ON Clusters.id=GroupContact.clusterId
+    `;
 
     const result = await connection.execute(sql);
 
