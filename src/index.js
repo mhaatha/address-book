@@ -48,6 +48,7 @@ switch (command) {
     break;
 
   case "showContact":
+    contactController.show();
     break;
 
   case "showGroups":

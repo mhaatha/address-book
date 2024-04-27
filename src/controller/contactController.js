@@ -34,4 +34,15 @@ const deleted = async (id) => {
   }
 };
 
-module.exports = { create, update, deleted };
+const show = async () => {
+  try {
+    const data = await model.show();
+    const result = await view.showContact(data);
+
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
+module.exports = { create, update, deleted, show };

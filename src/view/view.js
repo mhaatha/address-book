@@ -61,6 +61,15 @@ const deleteContact = async (id, data) => {
   }
 };
 
+const showContact = async (data) => {
+  try {
+    console.log(data[0]);
+    process.exit(0);
+  } catch (error) {
+    throw error;
+  }
+};
+
 // CLUSTERS
 const createClusters = async (data) => {
   try {
@@ -148,4 +157,5 @@ module.exports = {
   createGroupContact,
   updateGroupContact,
   deleteGroupContact,
+  showContact,
 };

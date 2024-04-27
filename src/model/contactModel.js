@@ -44,4 +44,17 @@ const deleted = async (id) => {
   }
 };
 
-module.exports = { create, update, deleted };
+const show = async () => {
+  try {
+    const connection = await createConnection();
+    const sql = "SELECT * FROM Contact";
+
+    const result = await connection.execute(sql);
+
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
+module.exports = { create, update, deleted, show };
