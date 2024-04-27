@@ -1,3 +1,31 @@
+const { Console } = require("console");
+const { Transform } = require("stream");
+
+const table = (input) => {
+  const ts = new Transform({
+    transform(chunk, enc, cb) {
+      cb(null, chunk);
+    },
+  });
+
+  const logger = new Console({ stdout: ts });
+  logger.table(input);
+
+  const table = (ts.read() || "").toString();
+  let result = "";
+
+  for (let row of table.split(/[\r\n]+/)) {
+    let r = row.replace(/[^┬]*┬/, "┌");
+    r = r.replace(/^├─*┼/, "├");
+    r = r.replace(/│[^│]*/, "");
+    r = r.replace(/^└─*┴/, "└");
+    r = r.replace(/'/g, " ");
+    result += `${r}\n`;
+  }
+  
+  console.log(result);
+};
+
 const help = async () => {
   try {
     console.log(`
@@ -63,7 +91,7 @@ const deleteContact = async (id, data) => {
 
 const showContact = async (data) => {
   try {
-    console.log(data[0]);
+    table(data[0]);
     process.exit(0);
   } catch (error) {
     throw error;
@@ -146,6 +174,15 @@ const deleteGroupContact = async (id, data) => {
   }
 };
 
+const showGroups = async (data) => {
+  try {
+    table(data[0])
+    process.exit(0);
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   help,
   createContact,
@@ -158,4 +195,5 @@ module.exports = {
   updateGroupContact,
   deleteGroupContact,
   showContact,
+  showGroups
 };

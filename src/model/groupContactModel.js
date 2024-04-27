@@ -43,4 +43,22 @@ const deleted = async (id) => {
   }
 };
 
-module.exports = { create, update, deleted };
+const showGroups = async () => {
+  try {
+    const connection = await createConnection();
+    const sql = `
+    SELECT Contact.name, Contact.phoneNumber, Contact.company, Contact.email, Clusters.clusterName
+    FROM Contact
+    INNER JOIN GroupContact ON Contact.id=GroupContact.contactId
+    INNER JOIN Clusters ON GroupContact.clusterId=Clusters.id
+    `
+
+    const result = await connection.execute(sql);
+
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
+module.exports = { create, update, deleted, showGroups };
